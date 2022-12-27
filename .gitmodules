@@ -11,3 +11,6 @@
 	path = lib/v3-core
 	url = https://github.com/uniswap/v3-core
 	branch = 0.8
+[submodule "lib/bunni"]
+	path = lib/bunni
+	url = https://github.com/zeframlou/bunni

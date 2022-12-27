@@ -10,7 +10,7 @@ import {IUniswapV3PoolDerivedState} from "v3-core/interfaces/pool/IUniswapV3Pool
 /// @author zefram.eth
 /// @notice Flashloan-proof Uniswap v3 price-out-of-range oracle for querying if a position is out of range onchain
 /// @dev Allows anyone to take a recording of a position over a time window to see for what proportion of the window
-/// is the position in range. If the proportion is above the threshold (set at deploy-time) then it's state becomes
+/// was the position in range. If the proportion is above the threshold (set at deploy-time) then it's state becomes
 /// IN_RANGE, otherwise it becomes OUT_OF_RANGE.
 contract UniswapPoorOracle {
     /// -----------------------------------------------------------------------

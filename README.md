@@ -1,6 +1,10 @@
-# Foundry template
+# Uniswap Poor Oracle
 
-This is a template for a Foundry project.
+Flashloan-proof Uniswap v3 price-out-of-range oracle for querying if a position is out of range onchain.
+
+Allows anyone to take a recording of a position over a time window to see for what proportion of the window
+was the position in range. If the proportion is above the threshold (set at deploy-time) then it's state becomes
+`IN_RANGE`, otherwise it becomes `OUT_OF_RANGE`.
 
 ## Installation
 

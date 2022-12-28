@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.13;
 
 import {SafeCastLib} from "solmate/utils/SafeCastLib.sol";
 import {FixedPointMathLib} from "solmate/utils/FixedPointMathLib.sol";
@@ -104,7 +104,9 @@ contract UniswapPoorOracle {
     /// User actions
     /// -----------------------------------------------------------------------
 
-    /// @notice Starts a new recording.
+    /// @notice Starts a new recording. Will revert if either tickLower or tickUpper hasn't been
+    /// initialized in the Uniswap pool (which wouldn't be the case if a position [tickLower, tickUpper]
+    /// exists).
     /// @dev If a recording already exists for the position but it's length is more than the maximum,
     /// it simply gets overwritten.
     /// @param pool The Uniswap V3 pool

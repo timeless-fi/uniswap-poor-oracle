@@ -83,6 +83,11 @@ contract UniswapPoorOracleTest is Test, UniswapDeployer {
         skip(RECORDING_MIN_LENGTH);
         UniswapPoorOracle.PositionState state = oracle.finishRecording(address(pool), TICK_LOWER, TICK_UPPER);
         assertEq(uint256(state), uint256(UniswapPoorOracle.PositionState.IN_RANGE), "State not IN_RANGE");
+        assertEq(
+            uint256(oracle.getPositionState(address(pool), TICK_LOWER, TICK_UPPER)),
+            uint256(UniswapPoorOracle.PositionState.IN_RANGE),
+            "State not IN_RANGE"
+        );
     }
 
     function test_inRangeRecording_inRangePartOfTheTime() public {
@@ -111,6 +116,11 @@ contract UniswapPoorOracleTest is Test, UniswapDeployer {
         skip(RECORDING_MIN_LENGTH - RECORDING_MIN_LENGTH * 2 / 3);
         UniswapPoorOracle.PositionState state = oracle.finishRecording(address(pool), TICK_LOWER, TICK_UPPER);
         assertEq(uint256(state), uint256(UniswapPoorOracle.PositionState.IN_RANGE), "State not IN_RANGE");
+        assertEq(
+            uint256(oracle.getPositionState(address(pool), TICK_LOWER, TICK_UPPER)),
+            uint256(UniswapPoorOracle.PositionState.IN_RANGE),
+            "State not IN_RANGE"
+        );
     }
 
     function test_outOfRangeRecording_outOfRangeAllTheTime() public {
@@ -134,10 +144,15 @@ contract UniswapPoorOracleTest is Test, UniswapDeployer {
         );
 
         // record
-        oracle.startRecording(address(pool), 100, tickUpper);
+        oracle.startRecording(address(pool), tickLower, tickUpper);
         skip(RECORDING_MIN_LENGTH);
-        UniswapPoorOracle.PositionState state = oracle.finishRecording(address(pool), 100, tickUpper);
+        UniswapPoorOracle.PositionState state = oracle.finishRecording(address(pool), tickLower, tickUpper);
         assertEq(uint256(state), uint256(UniswapPoorOracle.PositionState.OUT_OF_RANGE), "State not OUT_OF_RANGE");
+        assertEq(
+            uint256(oracle.getPositionState(address(pool), tickLower, tickUpper)),
+            uint256(UniswapPoorOracle.PositionState.OUT_OF_RANGE),
+            "State not OUT_OF_RANGE"
+        );
     }
 
     function test_outOfRangeRecording_outOfRangePartOfTheTime() public {
@@ -166,6 +181,11 @@ contract UniswapPoorOracleTest is Test, UniswapDeployer {
         skip(RECORDING_MIN_LENGTH - RECORDING_MIN_LENGTH / 3);
         UniswapPoorOracle.PositionState state = oracle.finishRecording(address(pool), TICK_LOWER, TICK_UPPER);
         assertEq(uint256(state), uint256(UniswapPoorOracle.PositionState.OUT_OF_RANGE), "State not OUT_OF_RANGE");
+        assertEq(
+            uint256(oracle.getPositionState(address(pool), TICK_LOWER, TICK_UPPER)),
+            uint256(UniswapPoorOracle.PositionState.OUT_OF_RANGE),
+            "State not OUT_OF_RANGE"
+        );
     }
 
     function test_fail_startRecordingTwice() public {

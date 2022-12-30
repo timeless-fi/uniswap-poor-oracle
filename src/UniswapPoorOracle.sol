@@ -155,6 +155,7 @@ contract UniswapPoorOracle {
 
         // update position state
         state = proportionInRange >= inRangeThreshold ? PositionState.IN_RANGE : PositionState.OUT_OF_RANGE;
+        _positionState[key] = state;
 
         // delete recording
         delete _recordingState[key];

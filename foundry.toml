@@ -2,7 +2,8 @@
 optimizer_runs = 1000000
 verbosity = 1
 remappings = [
-    "bunni/=lib/bunni/"
+    "bunni/=lib/bunni/",
+    "create3-factory/=lib/create3-factory/src/"
 ]
 
 # Extreme Fuzzing CI Profile :P
